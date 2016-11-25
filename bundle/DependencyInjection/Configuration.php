@@ -56,6 +56,13 @@ class Configuration extends SiteAccessConfiguration
                     ->end()
                 ->end()
             ->end()
+            ->arrayNode('legacy_content')
+                ->children()
+                    ->scarlarNode('path_prefix')
+                        ->info('Manually specify a path prefix for a siteaccess, to skip calling the DB.')
+                    ->end()
+                ->end()
+            ->end()
             ->booleanNode('legacy_mode')
                 ->info('Whether to use legacy mode or not. If true, will let the legacy kernel handle url aliases.')
             ->end();

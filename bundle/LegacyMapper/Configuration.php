@@ -281,7 +281,11 @@ class Configuration implements EventSubscriberInterface
             return $result;
         }
 
-        $pathPrefix = trim($this->urlAliasGenerator->getPathPrefixByRootLocationId($rootLocationId), '/');
+        $pathPrefix = $this->configResolver->getParameter('legacy_content.path_prefix');
+        if ($pathPrefix === null) {
+            $pathPrefix = trim($this->urlAliasGenerator->getPathPrefixByRootLocationId($rootLocationId), '/');
+        }
+
         $pathPrefixExcludeItems = array_map(
             function ($value) {
                 return trim($value, '/');
